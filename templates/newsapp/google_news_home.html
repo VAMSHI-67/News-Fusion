@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}NewsFusion - Latest News{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h1 class="mb-4">{{ title|default:"Latest News" }}</h1>
+        <p class="text-muted">Welcome to NewsFusion - the latest news is refreshed when you load this page.</p>
+    </div>
+    <div class="col-md-4">
+        <form action="{% url 'search' %}" method="get" class="d-flex">
+            <input type="text" name="q" class="form-control me-2" placeholder="Search news...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    {% if articles %}
+        {% for article in articles %}
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'google_news_detail' article_id=article.id %}" class="text-decoration-none text-dark">
+                            {{ article.title }}
+                        </a>
+                    </h5>
+                    {% if article.summary %}
+                    <p class="card-text">{{ article.summary|truncatechars:150 }}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="news-source">{{ article.source }}</span>
+                        {% if article.published_time %}
+                        <span class="news-date ms-2">{{ article.published_time }}</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a href="{% url 'google_news_detail' article_id=article.id %}" class="btn btn-sm btn-outline-secondary me-2">Details</a>
+                        <a href="{{ article.url }}" target="_blank" class="btn btn-sm btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                <p class="mb-0">Fetching trending news. Please refresh in a moment.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

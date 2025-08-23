@@ -1,0 +1,80 @@
+/* NewsFusion Custom Styles */
+
+/* Card hover effect */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* News source badge */
+.news-source {
+    display: inline-block;
+    background-color: #e7f5ff;
+    color: #0d6efd;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Date styling */
+.news-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Custom button styles */
+.btn-search {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.btn-search:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Page header styling */
+.page-header {
+    border-bottom: 2px solid #f8f9fa;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+}
+
+/* Footer styling */
+footer {
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    background-color: #212529;
+    color: white;
+}
+
+/* Welcome message animation */
+.welcome-message {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Search form styling */
+.search-form {
+    margin-bottom: 2rem;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+} 

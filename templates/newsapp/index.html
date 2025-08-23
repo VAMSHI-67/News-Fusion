@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}NewsFusion - Your News Aggregator{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+        <div class="py-5">
+            <h1 class="display-4 mb-4">Welcome to NewsFusion</h1>
+            <p class="lead mb-4">Your one-stop destination for trending news from various Indian sources.</p>
+            
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Already a Member?</h5>
+                            <p class="card-text">Access your personalized news dashboard.</p>
+                            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">New to NewsFusion?</h5>
+                            <p class="card-text">Create an account to get started.</p>
+                            <a href="{% url 'register' %}" class="btn btn-outline-primary">Register</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h2>Features</h2>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Trending News</h5>
+                                <p class="card-text">Get the latest trending news from multiple sources in one place.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Search by Keyword</h5>
+                                <p class="card-text">Find news articles on specific topics using keyword search.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Multiple Sources</h5>
+                                <p class="card-text">News is aggregated from various trusted Indian sources.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

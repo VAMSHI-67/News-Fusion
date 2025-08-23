@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}NewsFusion - {{ title }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1 class="mb-4">{{ title }}</h1>
+        <form action="{% url 'search' %}" method="get" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search news..." value="{{ keyword }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+            <div class="mt-2">
+                <a href="{% url 'index' %}" class="btn btn-link">Back to Latest News</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    {% if articles %}
+        <div class="col-12 mb-4">
+            <div class="alert alert-info">
+                Found {{ articles|length }} results for "{{ keyword }}"
+                <br>
+                <small>The crawler is fetching more results in the background. Refresh to see new articles.</small>
+            </div>
+        </div>
+        
+        {% for article in articles %}
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'google_news_detail' article_id=article.id %}?q={{ keyword }}" class="text-decoration-none text-dark">
+                            {{ article.title }}
+                        </a>
+                    </h5>
+                    {% if article.summary %}
+                    <p class="card-text">{{ article.summary|truncatechars:150 }}</p>
+                    {% endif %}
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div>
+                        <span class="news-source">{{ article.source }}</span>
+                        {% if article.published_time %}
+                        <span class="news-date ms-2">{{ article.published_time }}</span>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <a href="{% url 'google_news_detail' article_id=article.id %}?q={{ keyword }}" class="btn btn-sm btn-outline-secondary me-2">Details</a>
+                        <a href="{{ article.url }}" target="_blank" class="btn btn-sm btn-outline-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-warning">
+                <p class="mb-0">No news articles found for "{{ keyword }}". The crawler is fetching results. Please wait a moment and refresh the page.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 
