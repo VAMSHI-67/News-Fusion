@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,28 @@ SECRET_KEY = 'django-insecure-c3lynus$sd!)bs80#ru=kdwgx5xn+1(h1-$f&g0royclx)*2n*
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+
+# Allow Vercel and Render hosts (Render sets RENDER_EXTERNAL_HOSTNAME)
+_render_host = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+ALLOWED_HOSTS = [
+    '.vercel.app',
+    '.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
+if _render_host:
+    ALLOWED_HOSTS.append(_render_host)
+
+# Ensure CSRF works behind Render/Vercel proxies
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://*.onrender.com',
+]
+if _render_host:
+    CSRF_TRUSTED_ORIGINS.append(f'https://{_render_host}')
+
+# Honor X-Forwarded-Proto for https
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
