@@ -36,7 +36,8 @@ AUTOTHROTTLE_DEBUG = False
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
-TWISTED_REACTOR = 'twisted.internet.selectreactor.SelectReactor'
+#TWISTED_REACTOR = 'twisted.internet.selectreactor.SelectReactor'
+TWISTED_REACTOR = 'twisted.internet.epollreactor.EPollReactor'
 
 # Logging level
 LOG_LEVEL = 'INFO'
